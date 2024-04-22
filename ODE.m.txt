@@ -1,0 +1,24 @@
+% Define the second-order ODE as a function
+function dydt = myODE(t, y)
+    % Define your second-order ODE here, for example:
+    % dy^2/dt^2 = -2*dy/dt - 3*y
+    dydt = zeros(2,1); % initialize the derivative vector
+    dydt(1) = y(2);    % dy/dt = z
+    dydt(2) = -2*y(2) - 3*y(1); % d^2y/dt^2 = -2*z - 3*y
+end
+
+% Define the time span
+tspan = [0 10]; % from t=0 to t=10
+
+% Define initial conditions
+y0 = [0; 1]; % y(0) = 0, dy/dt(0) = 1
+
+% Solve the ODE
+[t, y] = ode45(@myODE, tspan, y0);
+
+% Plot the solution
+plot(t, y(:,1), '-o');
+xlabel('Time (t)');
+ylabel('y(t)');
+title('Solution of Second Order ODE');
+legend('y(t)');
